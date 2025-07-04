@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "frontend/dist"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/dist/$1"
+    }
+  ],
+  "functions": {
+    "api/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "outputDirectory": "frontend/dist"
+}

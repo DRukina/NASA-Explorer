@@ -1,0 +1,14 @@
+{
+  "name": "nasa-explorer-api",
+  "version": "1.0.0",
+  "description": "Vercel serverless functions for NASA Explorer",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "@vercel/node": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "typescript": "^5.3.3"
+  }
+}

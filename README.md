@@ -283,14 +283,47 @@ The application implements intelligent caching at multiple levels:
 
 ## Deployment
 
-### Frontend (Vercel/Netlify)
+### Vercel Deployment (Recommended)
+
+This project is optimized for full-stack deployment on Vercel with serverless functions.
+
+#### Quick Deploy to Vercel
+
+1. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Ready for Vercel deployment"
+   git push origin main
+   ```
+
+2. **Deploy on Vercel:**
+   - Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+   - Click "New Project" and import your GitHub repository
+   - Configure build settings:
+     - **Build Command:** `cd frontend && npm ci && npm run build`
+     - **Output Directory:** `frontend/dist`
+     - **Install Command:** `cd frontend && npm ci`
+
+3. **Set Environment Variables:**
+   - Add `NASA_API_KEY` with your NASA API key
+   - Add `NODE_ENV` set to `production`
+
+4. **Deploy and Test:**
+   - Your app will be available at `https://your-app.vercel.app`
+   - API endpoints at `https://your-app.vercel.app/api/*`
+
+📖 **For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+### Alternative Deployment Options
+
+#### Frontend (Netlify/Vercel)
 ```bash
 cd frontend
 npm run build
 # Deploy the dist/ folder
 ```
 
-### Backend (Render/Railway/Heroku)
+#### Backend (Render/Railway/Heroku)
 ```bash
 cd backend
 npm run build
@@ -299,9 +332,7 @@ npm run build
 
 ### Environment Variables for Production
 - `NASA_API_KEY`: Your NASA API key
-- `PORT`: Server port (usually provided by hosting service)
 - `NODE_ENV`: Set to `production`
-- `FRONTEND_URL`: Your frontend domain
 
 ## NASA API Integration
 
