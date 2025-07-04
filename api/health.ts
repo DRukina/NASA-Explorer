@@ -1,23 +1,23 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { createApiResponse, handleCors } from './utils/helpers';
+import { withMiddleware, corsMiddleware, methodGuard } from './utils/middleware';
+import { createApiResponse } from './utils/responses';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (handleCors(req, res)) {
-    return;
-  }
-
-  if (req.method !== 'GET') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
-
+async function healthHandler(req: VercelRequest, res: VercelResponse): Promise<void> {
   const healthData = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'development',
     nasaApiKey: process.env.NASA_API_KEY ? 'configured' : 'using demo key',
-    version: '1.0.0',
+    version: '2.0.0',
+    uptime: process.uptime(),
+    memory: process.memoryUsage(),
   };
 
-  return createApiResponse(res, healthData);
+  createApiResponse(res, healthData);
 }
+
+export default withMiddleware(
+  healthHandler,
+  corsMiddleware,
+  methodGuard(['GET'])
+);
