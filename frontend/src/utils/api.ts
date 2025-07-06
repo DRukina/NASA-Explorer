@@ -7,7 +7,7 @@ import type {
 import { API_ENDPOINTS } from '../constants/api';
 import { createApiError } from './error';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
 class ApiClient {
   private baseURL: string;
@@ -74,9 +74,10 @@ class ApiClient {
   async getRandomApod(
     count: number = 1
   ): Promise<ApiResponse<ApodData | ApodData[]>> {
+    // APOD_RANDOM already includes ?count=1, so we use APOD with custom count
     const queryString = this.buildQueryString({ count });
     return this.request<ApodData | ApodData[]>(
-      `${API_ENDPOINTS.APOD_RANDOM}${queryString}`
+      `${API_ENDPOINTS.APOD}${queryString}`
     );
   }
 
@@ -117,7 +118,8 @@ class ApiClient {
   }
 
   async getNeoById(id: string): Promise<ApiResponse<NearEarthObject>> {
-    return this.request<NearEarthObject>(`${API_ENDPOINTS.NEO_BY_ID}/${id}`);
+    const queryString = this.buildQueryString({ id });
+    return this.request<NearEarthObject>(`${API_ENDPOINTS.NEO_BY_ID}${queryString}`);
   }
 
   async getHealth(): Promise<
