@@ -10,10 +10,5 @@
       "destination": "/frontend/dist/$1"
     }
   ],
-  "functions": {
-    "api/*.ts": {
-      "runtime": "@vercel/node@3.0.7"
-    }
-  },
   "outputDirectory": "frontend/dist"
 }
