@@ -1,15 +1,15 @@
 export const API_ENDPOINTS = {
   APOD: '/api/apod',
-  APOD_RANDOM: '/api/apod/random',
-  APOD_RANGE: '/api/apod/range',
+  APOD_RANDOM: '/api/apod?count=1',
+  APOD_RANGE: '/api/apod',
 
   NEO: '/api/neo',
-  NEO_FEED: '/api/neo/feed',
-  NEO_TODAY: '/api/neo/today',
-  NEO_STATS: '/api/neo/stats',
+  NEO_FEED: '/api/neo',
+  NEO_TODAY: '/api/neo?today=true',
+  NEO_STATS: '/api/neo?stats=true',
   NEO_BY_ID: '/api/neo',
 
-  HEALTH: '/health',
+  HEALTH: '/api/health',
 } as const;
 
 export const QUERY_KEYS = {
